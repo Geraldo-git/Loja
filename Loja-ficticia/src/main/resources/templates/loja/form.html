@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	layout:decorate="~{layout.html}">
+
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${mensagem !=null}"
+		th:text="${mensagem}"></div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Nova </p>
+		</div>
+		<div class="card-body">
+			<form method="POST" th:object="${loja}" th:action="@{/loja/novo}">
+			<input type = "hidden" th:field="*{id}"> 
+				<div class="form-group mb-3">
+					<label for="nome">Razão Social:</label>
+					<input class="form-control" type="text" th:field="*{nome}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></div>
+				</div>
+				<div class="form-group mb-3">
+					<label for="cnpj">CNPJ:</label>
+					<input class="form-control" type="text" th:field="*{cnpj}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('cnpj')}"
+						 th:errors="*{cnpj}"></div>
+				</div>
+				<button type="submit" class="btn btn-primary">Salvar
+					Alterações</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+</html>

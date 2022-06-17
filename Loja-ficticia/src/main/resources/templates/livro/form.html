@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	layout:decorate="~{layout.html}">
+
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${mensagem !=null}"
+		th:text="${mensagem}"></div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Novo Livro</p>
+		</div>
+		<div class="card-body">
+			<form method="POST" th:object="${livro}" th:action="@{/livro/editar}">
+			<input type = "hidden" th:field="*{id}"> 
+				<div class="form-group mb-2">
+					<label for="nome">Titulo</label>
+					<input class="form-control" type="text" th:field="*{nome}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></div>
+				</div>
+				<div class="form-group mb-2">
+					<label for="autor">Autor</label>
+					<input class="form-control" type="text" th:field="*{autor}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('autor')}"
+						 th:errors="*{autor}"></div>
+				</div>
+				<div class="form-group mb-2">
+				<label for="tema">Tema</label>
+				<input class="form-control" type="text" th:field="*{tema}" required></input>
+				<div class="text-danger" th:if="${#fields.hasErrors('tema')}"
+					 th:errors="*{tema}"></div>
+		</div>
+		<div class="form-group mb-2">
+		<label for="preco">Preço</label>
+		<input class="form-control" type="number" th:field="*{preco}" required></input>
+		<div class="text-danger" th:if="${#fields.hasErrors('preco')}"
+			 th:errors="*{preco}"></div>
+		</div>
+				<div class="form-group mb-2">
+					<label for="qtd">Quantidade</label>
+					<input class="form-control" type="number" th:field="*{qtd}" required></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('qtd')}"
+						 th:errors="*{qtd}"></div>
+				</div>
+				<div class="form-group mb-2">
+					<label for="nome">Loja</label>
+					<select class = "form-select" th:field="*{loja}">
+						<option th:each="loja: ${listaLojas}" th:value="${loja.id}" th:text="${loja.nome}"></option>
+					</select>
+					<div class="text-danger" th:if="${#fields.hasErrors('qtd')}"
+						 th:errors="*{qtd}"></div>
+				</div>
+				<button type="submit" class="btn btn-primary">Salvar
+					Livro</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+</html>
